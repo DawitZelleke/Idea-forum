@@ -31,8 +31,18 @@ class User extends Authenticatable
         ];
     }
 
-    public function taskLists(): HasMany
+    public function ideas(): HasMany
     {
-        return $this->hasMany(TaskList::class);
+        return $this->hasMany(Idea::class);
+    }
+
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function votes(): HasMany
+    {
+        return $this->hasMany(Vote::class);
     }
 }
