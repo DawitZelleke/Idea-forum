@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="IdeaNest logo">
+  <rect width="64" height="64" rx="14" fill="#4f46e5"/>
+  <path d="M32 14a13 13 0 0 0-7 24v4a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3v-4a13 13 0 0 0-7-24z" fill="#fef3c7"/>
+  <rect x="27" y="46" width="10" height="3.5" rx="1.75" fill="#c7d2fe"/>
+  <rect x="28.5" y="51" width="7" height="3.5" rx="1.75" fill="#c7d2fe"/>
+  <path d="M32 21v12M27 27l5-6 5 6" fill="none" stroke="#4f46e5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
