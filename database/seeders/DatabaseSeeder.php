@@ -2,52 +2,68 @@
 
 namespace Database\Seeders;
 
-use App\Models\Task;
-use App\Models\TaskList;
+use App\Models\Comment;
+use App\Models\Idea;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
     /**
-     * Seed the application's database with a demo account and sample data.
+     * Seed the application's database with demo accounts and forum content.
      *
-     * Demo login: demo@tasknest.test / password
+     * Demo login: demo@ideanest.test / password
      */
     public function run(): void
     {
         $demo = User::factory()->create([
             'name' => 'Demo User',
-            'email' => 'demo@tasknest.test',
+            'email' => 'demo@ideanest.test',
         ]);
 
-        $lists = [
-            ['name' => 'School', 'color' => '#6366f1'],
-            ['name' => 'Job Search', 'color' => '#10b981'],
-            ['name' => 'Personal', 'color' => '#f59e0b'],
-        ];
+        $members = User::factory()->count(3)->sequence(
+            ['name' => 'Aisha Rahman', 'email' => 'aisha@ideanest.test'],
+            ['name' => 'Marc Tremblay', 'email' => 'marc@ideanest.test'],
+            ['name' => 'Priya Patel', 'email' => 'priya@ideanest.test'],
+        )->create();
 
-        foreach ($lists as $data) {
-            $list = TaskList::factory()->for($demo)->create($data);
+        $everyone = $members->push($demo);
 
-            Task::factory()
-                ->count(5)
-                ->for($list, 'taskList')
-                ->sequence(fn ($sequence) => ['position' => $sequence->index + 1])
+        // Ideas from the demo user and other members.
+        $ideas = collect([
+            Idea::factory()->for($demo)->create([
+                'title' => 'Dark mode for the student portal',
+                'category' => 'Feature',
+            ]),
+            Idea::factory()->for($members[0])->create([
+                'title' => 'Weekly study group for web dev courses',
+                'category' => 'Discussion',
+            ]),
+            Idea::factory()->for($members[1])->create([
+                'title' => 'Improve search on the course catalog',
+                'category' => 'Improvement',
+                'status' => 'planned',
+            ]),
+        ])->concat(
+            Idea::factory()
+                ->count(6)
+                ->recycle($everyone)
+                ->create()
+        );
+
+        // Comments and votes spread across users and ideas.
+        foreach ($ideas as $idea) {
+            Comment::factory()
+                ->count(random_int(0, 3))
+                ->for($idea)
+                ->recycle($everyone)
                 ->create();
+
+            $voters = $everyone->random(random_int(0, $everyone->count()));
+
+            foreach ($voters as $voter) {
+                $idea->votes()->create(['user_id' => $voter->id]);
+            }
         }
-
-        // A second user proves data isolation between accounts.
-        $other = User::factory()->create([
-            'name' => 'Other User',
-            'email' => 'other@tasknest.test',
-        ]);
-
-        TaskList::factory()
-            ->for($other)
-            ->has(Task::factory()->count(3)->sequence(
-                ['position' => 1], ['position' => 2], ['position' => 3],
-            ), 'tasks')
-            ->create(['name' => 'Other Errands', 'color' => '#ef4444']);
     }
 }
