@@ -61,7 +61,7 @@ git clone https://github.com/DawitZelleke/Idea-forum.git
 Enter the Laravel project directory:
 
 ```bash
-cd Idea-forum
+cd IdeaNest_Capstone
 ```
 
 If the repository contains an additional `ideanest` folder, enter it:
