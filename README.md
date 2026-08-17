@@ -7,53 +7,397 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## # IdeaNest
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+IdeaNest is a Laravel-based idea-sharing forum where registered users can create, manage, discuss, and vote on ideas. The project uses Laravel, Livewire, Tailwind CSS/Vite, and SQLite.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+* User registration and login
+* Create, view, edit, and delete ideas
+* Comment on ideas
+* Edit and delete comments
+* Upvote ideas
+* Remove an existing vote
+* Idea categories and filtering
+* Idea status management
+* Authorization so users can only modify their own content
+* Responsive user interface
+* Database migrations and seed data
+* Automated feature and unit tests
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## Requirements
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Before running the project, ensure the following are installed:
 
-## Laravel Sponsors
+* PHP 8.2 or newer
+* Composer
+* Node.js 20 or newer
+* npm
+* Git
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Verify the installations with:
 
-### Premium Partners
+```bash
+php --version
+composer --version
+node --version
+npm --version
+git --version
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+---
 
-## Contributing
+## Installation and Setup
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 1. Clone the Repository
 
-## Code of Conduct
+```bash
+git clone https://github.com/DawitZelleke/Idea-forum.git
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Enter the Laravel project directory:
 
-## Security Vulnerabilities
+```bash
+cd Idea-forum
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+If the repository contains an additional `ideanest` folder, enter it:
 
-## License
+```bash
+cd ideanest
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The correct directory should contain:
+
+```text
+artisan
+composer.json
+package.json
+app/
+database/
+resources/
+routes/
+```
+
+---
+
+### 2. Install PHP Dependencies
+
+Run:
+
+```bash
+composer install
+```
+
+This creates the `vendor` directory.
+
+The `vendor` directory is intentionally excluded from GitHub because it is generated automatically by Composer.
+
+---
+
+### 3. Install Front-End Dependencies
+
+Run:
+
+```bash
+npm install
+```
+
+This creates the `node_modules` directory.
+
+`node_modules` is also intentionally excluded from GitHub.
+
+---
+
+### 4. Create the Environment File
+
+If `.env` does not already exist, create it from `.env.example`.
+
+#### Windows PowerShell
+
+```powershell
+Copy-Item .env.example .env
+```
+
+#### macOS/Linux
+
+```bash
+cp .env.example .env
+```
+
+---
+
+### 5. Generate the Laravel Application Key
+
+Run:
+
+```bash
+php artisan key:generate
+```
+
+A successful result should display:
+
+```text
+Application key set successfully.
+```
+
+---
+
+## Database Setup
+
+IdeaNest uses SQLite.
+
+### 6. Create the SQLite Database
+
+#### Windows PowerShell
+
+```powershell
+New-Item -ItemType File -Path database\database.sqlite -Force
+```
+
+#### macOS/Linux
+
+```bash
+touch database/database.sqlite
+```
+
+The following file should now exist:
+
+```text
+database/database.sqlite
+```
+
+Ensure the `.env` file contains an SQLite configuration such as:
+
+```env
+DB_CONNECTION=sqlite
+```
+
+---
+
+### 7. Run Database Migrations and Seeders
+
+Run:
+
+```bash
+php artisan migrate --seed
+```
+
+This creates the required database tables and inserts the provided demonstration data.
+
+If a completely fresh development database is required, use:
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+> `migrate:fresh` deletes existing tables and data before recreating the database.
+
+---
+
+## Build the Front End
+
+Run:
+
+```bash
+npm run build
+```
+
+This compiles the project's Vite/Tailwind assets.
+
+For active front-end development, the development server can instead be started with:
+
+```bash
+npm run dev
+```
+
+---
+
+## Clear Laravel Cache
+
+Before starting the application, the Laravel cache can be cleared with:
+
+```bash
+php artisan optimize:clear
+```
+
+---
+
+## Run Automated Tests
+
+Run:
+
+```bash
+php artisan test
+```
+
+This executes the project's feature and unit tests, including tests for authentication, ideas, comments, and voting functionality.
+
+---
+
+## Run the Application
+
+Start the Laravel development server:
+
+```bash
+php artisan serve
+```
+
+Laravel should display an address similar to:
+
+```text
+http://127.0.0.1:8000
+```
+
+Open the address in a web browser.
+
+---
+
+## Demo Account
+
+The seeded database includes a demonstration account:
+
+```text
+Email: demo@ideanest.test
+Password: password
+```
+
+A new user may also be created through the registration page.
+
+---
+
+## Quick Setup
+
+After cloning the repository, the main commands required to run the application are:
+
+```bash
+composer install
+npm install
+php artisan key:generate
+php artisan migrate --seed
+npm run build
+php artisan optimize:clear
+php artisan test
+php artisan serve
+```
+
+If the SQLite database does not yet exist, create `database/database.sqlite` before running the migrations.
+
+---
+
+## Important Git Notes
+
+The following generated or machine-specific files/directories are intentionally not stored in GitHub:
+
+```text
+vendor/
+node_modules/
+.env
+database/database.sqlite
+```
+
+They are recreated locally through the installation instructions above.
+
+The important dependency files that are stored in GitHub include:
+
+```text
+composer.json
+composer.lock
+package.json
+package-lock.json
+```
+
+These files allow Composer and npm to install the required packages.
+
+---
+
+## Troubleshooting
+
+### `vendor/autoload.php` Not Found
+
+Run:
+
+```bash
+composer install
+```
+
+### `No application encryption key has been specified`
+
+Run:
+
+```bash
+php artisan key:generate
+```
+
+### SQLite Database Does Not Exist
+
+Create:
+
+```text
+database/database.sqlite
+```
+
+Then run:
+
+```bash
+php artisan migrate --seed
+```
+
+### Front-End Styling Is Missing
+
+Run:
+
+```bash
+npm install
+npm run build
+```
+
+### Laravel Cache Issues
+
+Run:
+
+```bash
+php artisan optimize:clear
+```
+
+### Check Available Routes
+
+Run:
+
+```bash
+php artisan route:list
+```
+
+---
+
+## Recommended Evaluation Setup
+
+For a clean evaluation of the project:
+
+```bash
+git clone https://github.com/DawitZelleke/Idea-forum.git
+cd Idea-forum
+composer install
+npm install
+```
+
+Create `.env` from `.env.example`, create `database/database.sqlite`, and then run:
+
+```bash
+php artisan key:generate
+php artisan migrate --seed
+npm run build
+php artisan test
+php artisan serve
+```
+
+Then open:
+
+```text
+http://127.0.0.1:8000
+```
+
+The application should now be ready for evaluation.
