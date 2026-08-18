@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
     "content-hash": "474070d074db55f060186666eed3e579",
-=======
-    "content-hash": "355f554329ccd30eb6cd159ab7725f32",
->>>>>>> Mohammed-Bouderka
     "packages": [
         {
             "name": "brick/math",
@@ -2031,7 +2027,6 @@
         },
         {
             "name": "livewire/livewire",
-<<<<<<< HEAD
             "version": "v4.4.0",
             "source": {
                 "type": "git",
@@ -2042,18 +2037,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/livewire/livewire/zipball/514b29d5a23594d4e4846494f580268b20c2f11e",
                 "reference": "514b29d5a23594d4e4846494f580268b20c2f11e",
-=======
-            "version": "v4.3.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/livewire/livewire.git",
-                "reference": "7ef4b2a876c71744e86463079dd506b26eeab624"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/livewire/livewire/zipball/7ef4b2a876c71744e86463079dd506b26eeab624",
-                "reference": "7ef4b2a876c71744e86463079dd506b26eeab624",
->>>>>>> Mohammed-Bouderka
                 "shasum": ""
             },
             "require": {
@@ -2108,11 +2091,7 @@
             "description": "A front-end framework for Laravel.",
             "support": {
                 "issues": "https://github.com/livewire/livewire/issues",
-<<<<<<< HEAD
                 "source": "https://github.com/livewire/livewire/tree/v4.4.0"
-=======
-                "source": "https://github.com/livewire/livewire/tree/v4.3.5"
->>>>>>> Mohammed-Bouderka
             },
             "funding": [
                 {
@@ -2120,11 +2099,7 @@
                     "type": "github"
                 }
             ],
-<<<<<<< HEAD
             "time": "2026-08-10T15:24:22+00:00"
-=======
-            "time": "2026-08-03T04:09:44+00:00"
->>>>>>> Mohammed-Bouderka
         },
         {
             "name": "monolog/monolog",

@@ -1,13 +1,4 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
-
-## # IdeaNest
+# IdeaNest
 
 IdeaNest is a Laravel-based idea-sharing forum where registered users can create, manage, discuss, and vote on ideas. The project uses Laravel, Livewire, Tailwind CSS/Vite, and SQLite.
 
@@ -56,21 +47,10 @@ git --version
 
 ```bash
 git clone https://github.com/DawitZelleke/Idea-forum.git
+cd Idea-forum
 ```
 
-Enter the Laravel project directory:
-
-```bash
-cd IdeaNest_Capstone
-```
-
-If the repository contains an additional `ideanest` folder, enter it:
-
-```bash
-cd ideanest
-```
-
-The correct directory should contain:
+The project directory should contain:
 
 ```text
 artisan
@@ -275,11 +255,23 @@ After cloning the repository, the main commands required to run the application 
 
 ```bash
 composer install
+composer run setup
+php artisan serve
+```
+
+`composer run setup` creates `.env`, creates `database/database.sqlite`, generates the
+app key, runs the migrations with seed data, then runs `npm install` and `npm run build`.
+
+To do the same steps manually instead:
+
+```bash
+composer install
 npm install
+cp .env.example .env
+touch database/database.sqlite
 php artisan key:generate
 php artisan migrate --seed
 npm run build
-php artisan optimize:clear
 php artisan test
 php artisan serve
 ```
