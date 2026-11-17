@@ -2,6 +2,16 @@
 
 IdeaNest is a Laravel-based idea-sharing forum where registered users can create, manage, discuss, and vote on ideas. The project uses Laravel, Livewire, Tailwind CSS/Vite, and SQLite.
 
+## Review the implementation
+
+- [IdeaPolicy](app/Policies/IdeaPolicy.php) enforces owner-only updates and deletion.
+- [Idea feature tests](tests/Feature/IdeaTest.php) cover creation, validation, and allowed or forbidden edits.
+- [Comment and vote tests](tests/Feature/CommentVoteTest.php) cover ownership, vote toggling, and a database uniqueness constraint.
+
+The duplicate-vote test bypasses the normal UI action so the database constraint is checked independently. Test files are included; run the suite in your environment rather than treating this README as a current passing result.
+
+This repository is currently private. A public portfolio description does not imply public source access or a live hosted demo.
+
 ## Features
 
 * User registration and login
